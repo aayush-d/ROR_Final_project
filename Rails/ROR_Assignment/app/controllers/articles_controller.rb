@@ -8,12 +8,11 @@ class ArticlesController < ApplicationController
     end
 
     def create
-        @article = Article.new(params.require(:article).permit(:title, :description, :author))
+        @article = Article.new(params.require(:article).permit(:title, :description))
         if @article.save
             flash[:notice] = "Article created successfully."
             redirect_to @article
         else
-            puts "======================"
             render "new", status: :unprocessable_entity
         end
     end
@@ -34,7 +33,7 @@ class ArticlesController < ApplicationController
 
     def update
         @article = Article.find(params[:id])
-        if @article.update(params.require(:article).permit(:title, :description, :author))
+        if @article.update(params.require(:article).permit(:title, :description))
             flash[:notice] = "Article updated successfully."
             redirect_to @article
         else
