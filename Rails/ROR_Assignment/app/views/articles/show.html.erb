@@ -4,3 +4,8 @@
 <strong>Title      : </strong><%=@article.title%>
 <strong>Description: </strong><%=@article.description%>
 </pre>
+
+
+<%= link_to "Edit this article", edit_article_path %>
+<%= link_to "Delete", article_path(@article), method: :delete, data:{turbo_method: :delete} %>
+<%= link_to "Back to articles listing", articles_path %>
