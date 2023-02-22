@@ -9,7 +9,7 @@
             <th>Last Name</th>
             <th>Email-id</th>
             <th>Age</th>
-            <th>Action</th>
+            <th colspan=3>Action</th>
         </tr>
     </thead>
 
@@ -33,4 +33,7 @@
     
 </table>
    
-
+<p>
+<%= link_to "Create new user", new_user_path%><br>
+<%= link_to "Homepage", root_path %>
+</p>
