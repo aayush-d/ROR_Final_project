@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
     def index
-        @users = User.all
+        if current_user.nil? == false and current_user.id == 1
+            @users = User.paginate(page: params[:page], per_page: 5)
+        else
+            flash[:notice] = "Not sufficient priviliges to access the page"
+            redirect_to login_path
+        end
     end
     
     def new
@@ -11,18 +16,24 @@ class UsersController < ApplicationController
         @user = User.new(params.require(:user).permit(:username, :first_name, :last_name, :email, :age, :password))
         if @user.save
             flash[:notice] = "User created successfully."
-            redirect_to @user
+            redirect_to root_path
         else
             render "new", status: :unprocessable_entity
         end
     end
 
     def show
-        @user = User.find(params[:id])
+        if current_user.nil? == false
+            @user = User.find(params[:id])
+        else
+            flash[:notice] = "Kindly log in to see your user details"
+            redirect_to login_path
+        end
     end
 
     def destroy
         @user = User.find(params[:id])
+        session.delete(:user_id)
         @user.destroy
         redirect_to users_path
     end
@@ -33,7 +44,7 @@ class UsersController < ApplicationController
 
     def update
         @user = User.find(params[:id])
-        if @user.update(params.require(:user).permit(:username, :first_name, :last_name, :email, :age, :password))
+        if @user.update(params.require(:user).permit(:first_name, :last_name, :password))
             flash[:notice] = "User updated successfully."
             redirect_to @user
         else

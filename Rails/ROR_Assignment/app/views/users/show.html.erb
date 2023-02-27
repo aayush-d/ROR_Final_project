@@ -1,5 +1,4 @@
 <h1>User details</h1>
-
 <pre>
 <strong>Username  : </strong><%=@user.username%>
 <strong>First Name: </strong><%=@user.first_name%>
@@ -9,14 +8,15 @@
 </pre>
 
 <%= link_to "Edit this user", edit_user_path %>
-<%= link_to "Delete", user_path(@user), method: :delete, data:{turbo_method: :delete} %>
+<%= link_to "Delete profile", user_path(@user), method: :delete, data:{turbo_method: :delete, turbo_confirm: "Are you sure you want to delete your profile?"} %>
 <% if @user.id==1%>
     <%= link_to "View all users", users_path %>
 <% end%>
 
 <h1>User Articles details</h1>
 <% curr_user = current_user %>
-<% @articles = curr_user.articles %>
+
+<% @articles = curr_user.articles.paginate(page: params[:page], per_page: 5) %>
 
 
 <%= render "articles/article" %>
@@ -24,4 +24,3 @@
     <%= link_to "Create new article", new_article_path%><br>
     <%= link_to "View all articles", articles_path %>
 </p>
-

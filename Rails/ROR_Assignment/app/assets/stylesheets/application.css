@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+
+header {
+    height: 65pt;
+    position: sticky;
+    top: 0;
+  }
+
+.navigation ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+#user_name {
+    padding-top: 9pt;
+    margin-left: 320pt;
+    align-items: center;
+}
+
+
+
+ 
+  

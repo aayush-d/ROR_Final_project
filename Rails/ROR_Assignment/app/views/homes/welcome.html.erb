@@ -1,4 +1,8 @@
 <h1>Welcome to Article</h1>
 
 <%= link_to "List of articles", articles_path%>
-<%= link_to "List of users", users_path%>
+<% if current_user.nil? == false and (current_user.id == 1)%>
+    <%= link_to "List of users", users_path%>
+<% else %>
+    <%= link_to "List of users", users_path, hidden: true%>
+<% end %>

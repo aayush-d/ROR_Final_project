@@ -5,7 +5,6 @@
 
 <p>
 <% if current_user.nil? == false %>
-    <%= link_to "Create new article", new_article_path%><br>
     <%= link_to "Back to user page", user_path(current_user) %>
 <% else%>
     <%= link_to "Back to homepage", root_path%>
