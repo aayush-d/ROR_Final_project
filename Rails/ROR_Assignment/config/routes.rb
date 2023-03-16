@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "homes#welcome"
-  get "admin_home", to: "homes#admin_home"
 
   resources :articles
   get "signup", to: "users#new"

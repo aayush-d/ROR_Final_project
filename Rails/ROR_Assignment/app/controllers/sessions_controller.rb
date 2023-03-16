@@ -18,11 +18,11 @@ class SessionsController < ApplicationController
                 redirect_to user_path(user)
             else
                 puts "========"
-                flash.now[:alert] = "Wrong credentials. Kindly enter the correct credentials"
+                flash[:notice] = "Wrong credentials. Kindly enter the correct credentials"
                 render "new"
             end
         else
-            flash.now[:alert] = "User does not exist. Kindly make an account first."
+            flash[:notice] = "User does not exist. Kindly make an account first."
             render "new"
         end    
     end
