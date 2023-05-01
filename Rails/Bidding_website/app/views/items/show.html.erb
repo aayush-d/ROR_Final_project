@@ -1,0 +1,28 @@
+<h1>Item details</h1>
+
+<pre>
+<strong>Title      : </strong><%=@item.title%>
+<strong>Description: </strong><%=@item.description%>
+<strong>Category   : </strong><%= @item.category%>
+<strong>Seller     : </strong><%= "#{@item.seller.first_name} #{@item.seller.last_name}"%>
+<%if bidder_signed_in? %>
+<strong>Category   : </strong><%=@item.category%>
+<strong>Status     : </strong><%=@item.status%>
+<strong>Min Bid    : </strong><%=@item.title%>
+<strong>Current bid: </strong><%=@item.title%>
+<% end %>
+</pre>
+
+<% if current_seller.nil? == false and  @item.seller_id==current_seller.id%>
+    <%= link_to "Edit this item", edit_item_path %>
+    <%= link_to "Delete", items_path(@item), method: :delete, data:{turbo_method: :delete} %>
+<% end %>
+<% if current_seller.nil? == false %>
+    <%= link_to "Post a new item", new_item_path%><br>
+    <%= link_to "Back to seller page", seller_profile_page_path(current_seller) %>
+<%elsif current_bidder.nil? == false  and @item.bidder_id != current_bidder.id%>
+    <%= link_to "Place a bid", place_bid_path(@item.id)%><br>
+<% else%>
+<% end %>
+
+<%= link_to "Back to items listing", items_path%>

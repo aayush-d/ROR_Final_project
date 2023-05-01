@@ -1,0 +1,38 @@
+Buy/Sell. Bidding website
+A landing page which anyone can navigate without login
+All users can register with website with these fields (first name, last name,  email, phone, password, password confirmation)
+All users can update his profile (avatar, other details)
+
+Seller:
+A seller can add and item to sell (status: draft, sell, sold) on website with minimum price, photos of item, name, description, last date for bid
+Item will be sold to the highest bidder after last date
+Seller can see a list of all his items to sell (old/new) 
+Item can be under some predefined category
+
+Bidder: 
+Can see list of items for sell
+Search and filter based items category / name
+Add a bid to the item
+Can comment on item to be sold
+One bidder wins the bid he can make payment  (Use stripe of paypal for payment)
+Can see all items he bought
+
+Security:
+Use friendly-id for url wherever required
+Use devise gem for authentication
+Password with capital / small / special char / at least 8 character
+
+Must:
+First data modeling (proper use of schema, entities, associations and tables )
+Follow good practices and styles   https://github.com/airbnb/ruby
+Modularity
+Reusability
+Rspec Unit testing
+devise authentication system with your custom controllers
+User friendly-id for user
+Avoid N+1 query wherever possible
+User indexing wherever search is needed (avoid unnecessary indexes)
+
+Desired:
+Bootstrap or other ui library
+Show error and messages wherever required

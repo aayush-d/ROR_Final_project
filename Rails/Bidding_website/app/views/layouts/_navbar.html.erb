@@ -1,0 +1,25 @@
+<div class = "navigation">
+<ul>
+    <li style="float:left"><%= button_to "Homepage", root_path, method: "get" %></li>
+    <% if seller_signed_in? %>
+        <li style="float:left"><%= button_to "Upload a new item", new_item_path, method: "get" %></li>
+
+    <% end %>
+    <li style="float:left"><%= button_to "View all items", items_path, method: "get" %></li>
+    <% if seller_signed_in? %>
+        <li style="float:right"><%= button_to "Log out", destroy_seller_session_path, method: :delete %></li>
+        <div id = "user_name">
+            <li style="float:left"><%= link_to current_seller.first_name, seller_profile_page_path(current_seller.id) %></li>
+        </div>
+    <% elsif bidder_signed_in? %>
+        <li style="float:right"><%= button_to "Log out", destroy_bidder_session_path, method: :delete %></li>
+        <div id = "user_name">
+            <li style="float:left"><%= link_to current_bidder.first_name, bidder_profile_page_path(current_bidder.id) %></li>
+        </div>
+    <% else %>
+        <li style="float:right"><%= button_to "Log in", home_login_page_path, method: "get" %></li>
+        <li style="float:right"><%= button_to "Sign up", home_sign_up_page_path, method: "get" %></li>
+    <% end %>
+
+</ul>
+</div>

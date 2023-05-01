@@ -1,0 +1,36 @@
+<table>
+<caption></caption>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Seller</th>
+            <th colspan=3>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @items.each do |item| %>
+        <tr>
+            <%if item.status == "sell"%>
+                <% seller = Seller.find(item.seller_id)%>
+                <td><%= item.title %></td>
+                <td><%= item.description %></td>
+                <td><%= "#{seller.first_name} #{seller.last_name}" %></td>
+                <td><%= link_to "Show", item_path(item)%>
+                <% if current_seller.nil? == false and seller.id==current_seller.id%>
+                    <td><%= link_to "Edit", edit_item_path(item), method: edit_item_path(item)%>
+                    <td><%= link_to "Delete", item_path(item), method: :delete, data:{turbo_method: :delete}%></td>
+                <% elsif current_bidder.nil? == false and ((item.bidder_id != nil and item.bidder_id != current_bidder.id) or item.bidder_id == nil)%>
+                    <td><%= link_to "Place a bid", place_bid_path(item), method: "get"%>
+                <% else %>
+                    <td><% nil %></td>
+                <% end %>
+            <% end %>
+        </tr>
+        <% end %>
+    </tbody>
+
+</table>
+
+<%= will_paginate @items %>

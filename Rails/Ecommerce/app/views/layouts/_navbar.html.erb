@@ -1,0 +1,37 @@
+<div class = "navigation">
+<ul>
+    <% if @@merchant == 0 %>
+        <li style="float:left"><%= button_to "Homepage", root_path, method: "get" %></li>
+        <li style="float:left"><%= button_to "Consumer site", userpage_path, method: "get" %></li>
+        <li style="float:left"><%= button_to "Add new product", new_product_path %></li>
+        <li style="float:left"><%= button_to "View all productss", seller_products_path, method: "get" %></li>
+        <% if session[:user_id] != nil %>
+            <li style="float:right"><%= button_to "Log out", logout_path, method: :delete, data:{turbo_method: :delete} %></li>
+            <div id = "user_name">
+                <li style="float:left"><%= link_to current_user.username, user_path(current_user) %></li>
+            </div>
+        <% else %>
+            <li style="float:right"><%= button_to "Log in", login_path, method: "get" %></li>
+            <li style="float:right"><%= button_to "Sign up", signup_path, method: "get" %></li>
+        <% end %>
+    <% elsif @@merchant == 1 %>
+        <li style="float:left"><%= button_to "Homepage", root_path, method: "get" %></li>
+        <li style="float:left"><%= button_to "Merchant site", sellerpage_path, method: "get" %></li>
+        <li style="float:left"><%= button_to "Cart", user_cart_path %></li>
+        <li style="float:left"><%= button_to "View all orders", user_orders_path, method: "get" %></li>
+        <% if session[:user_id] != nil %>
+            <li style="float:right"><%= button_to "Log out", logout_path, method: :delete, data:{turbo_method: :delete} %></li>
+            <div id = "user_name">
+                <li style="float:left"><%= link_to current_user.username, user_path(current_user) %></li>
+            </div>
+        <% else %>
+            <li style="float:right"><%= button_to "Log in", login_path, method: "get" %></li>
+            <li style="float:right"><%= button_to "Sign up", signup_path, method: "get" %></li>
+        <% end %>
+    <% else%>
+        <li style="float:left"><%= button_to "Consumer site", userpage_path, method: "get" %></li>
+        <li style="float:left"><%= button_to "Merchant site", sellerpage_path, method: "get" %></li>
+    <% end %>
+
+</ul>
+</div>

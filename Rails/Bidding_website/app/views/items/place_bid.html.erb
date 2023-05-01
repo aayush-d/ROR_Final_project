@@ -1,0 +1,31 @@
+
+<h1>Item details</h1>
+<% if @item.errors.any? %>
+    <h2>The following errors prevented the user from saving:</h2>
+    <ul>
+        <% @item.errors.full_messages.each do |msg|%>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+<% end %>
+
+
+
+<pre>
+<strong>Title      : </strong><%=@item.title%>
+<strong>Description: </strong><%=@item.description%>
+<strong>Category   : </strong><%= @item.category%>
+<strong>Seller     : </strong><%= "#{@item.seller.first_name} #{@item.seller.last_name}"%>
+</pre>
+<%= form_with model: @item, url: place_bid_post_path(@item.id), local: true do |f| %>
+  <div class = "field">
+    <%= f.label :bidding_amount %>
+    <%= f.number_field :current_bid %>
+  </div>
+  
+    <%= f.hidden_field :bidder_id, value: current_bidder.id %>
+
+  <div class="actions">
+    <%= f.submit "Place bid" %>
+  </div>
+<% end %>

@@ -1,0 +1,61 @@
+<h1>Create new user account</h1>
+
+<% if @user.errors.any? %>
+    <h2>The following errors prevented the user from saving:</h2>
+    <ul>
+        <% @user.errors.full_messages.each do |msg|%>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+<% end %>
+
+
+<%=form_with model: @user, url: users_path, local: true do |form|%>
+
+    <p>
+    <%= form.label :username%><br/>
+    <%= form.text_field :username%>
+    </p>
+
+    <p>
+    <%= form.label :first_name%><br/>
+    <%= form.text_field :first_name%>
+    </p>
+
+    <p>
+    <%= form.label :last_name%><br/>
+    <%= form.text_field :last_name%>
+    </p>
+
+    <p>
+    <%= form.label :email%><br/>
+    <%= form.text_field :email%>
+    </p>
+
+    <p>
+    <%= form.label :password%><br/>
+    <%= form.password_field :password%>
+    </p>
+
+    <p>
+    <%= form.label :confirm_password%><br/>
+    <%= form.password_field :confirm_password%>
+    </p>
+
+    <p>
+    <%= form.label :age%><br/>
+    <%= form.text_field :age%>
+    </p>
+
+    <%= form.input :extended_profile, id: 'user_extended_profile' %>
+    <%= content_tag :div, class: 'js-dependent-fields', data: { 'checkbox-id': 'user_extended_profile', 'checkbox-value': 'true'} do %>
+      <%= form.input :twitter_handle %>
+      <%= form.input :facebook_handle %>
+      <%= form.input :github_handle %>
+    <% end %>
+
+    <p>
+    <%= form.submit "Sign up"%><br/>
+    </p>
+
+<%end%>
