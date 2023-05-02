@@ -28,15 +28,13 @@ class ItemsController < ApplicationController
 
     def place_bid_post
         @item = Item.find(params[:id])
-        if params[:item][:current_bid]
-            flash[:notice] = "Bid lesser than the minimum bidding amount."
-        elsif @item.current_bid>params[:item][:current_bid] 
-            flash[:notice] = "Bid lesser than the minimum bidding amount."
-        else
-            nil
-        end
-
-        if @item.update(params.require(:item).permit(:current_bid, :bidder_id))
+        if params[:item][:current_bid].to_i < @item.min_bid
+            flash[:notice] = "Bid must be greater than the minimum bidding amount."
+            redirect_to @item
+        elsif params[:item][:current_bid].to_i <= @item.current_bid
+            flash[:notice] = "Bid must be greater than the current bidding amount."
+            redirect_to @item
+        elsif @item.update(params.require(:item).permit(:current_bid, :bidder_id))
             flash[:notice] = "Bid placed successfully."
             redirect_to @item
         else
