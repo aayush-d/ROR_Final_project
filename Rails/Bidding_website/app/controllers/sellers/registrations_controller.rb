@@ -31,9 +31,11 @@ class Sellers::RegistrationsController < Devise::RegistrationsController
   # end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    @seller = Seller.find(current_seller.id)
+    @seller.destroy
+    redirect_to root_path, notice: 'Seller profile deleted.'
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign

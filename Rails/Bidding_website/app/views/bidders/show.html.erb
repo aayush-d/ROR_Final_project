@@ -1,0 +1,21 @@
+<h1>Bidder details</h1>
+<pre>
+<strong>Name      : </strong><%="#{@bidder.first_name} #{@bidder.last_name}"%>
+<strong>Email-id  : </strong><%=@bidder.email%>
+<strong>Phone     : </strong><%=@bidder.phone%>
+<strong>E-mail    : </strong><%=@bidder.email%>
+</pre>
+
+<%= link_to "Edit this bidder", edit_bidder_registration_path %>
+<%= link_to "Delete profile", bidder_registration_path %>
+<% if @bidder.id==1%>
+    <%= link_to "View all bidders", bidders_path %>
+<% end%>
+
+<h1>Bidder Items details</h1>
+<% curr_bidder = current_bidder %>
+
+<% @items = curr_bidder.items.paginate(page: params[:page], per_page: 5) %>
+
+
+<%= render "items/item" %>

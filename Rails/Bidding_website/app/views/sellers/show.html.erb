@@ -1,0 +1,24 @@
+<h1>Seller details</h1>
+<pre>
+<strong>Name      : </strong><%="#{@seller.first_name} #{@seller.last_name}"%>
+<strong>Email-id  : </strong><%=@seller.email%>
+<strong>Phone     : </strong><%=@seller.phone%>
+<strong>E-mail    : </strong><%=@seller.email%>
+</pre>
+
+<%= link_to "Edit this seller", edit_bidder_registration_path %>
+<%= link_to "Delete profile", seller_registration_path, method: :delete, data:{turbo_method: :delete, turbo_confirm: "Are you sure you want to delete your profile?"} %>
+<% if @seller.id==1%>
+    <%= link_to "View all sellers", sellers_path %>
+<% end%>
+
+<h1>Seller Items details</h1>
+<% curr_seller = current_seller %>
+
+<% @items = curr_seller.items.paginate(page: params[:page], per_page: 5) %>
+
+
+<%= render "items/item" %>
+<p>
+    <%= link_to "Upload a new item", new_item_path%><br>
+</p>

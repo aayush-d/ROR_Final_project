@@ -30,9 +30,11 @@ class Bidders::RegistrationsController < Devise::RegistrationsController
   # end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    @bidder = Bidder.find(current_bidder.id)
+    @bidder.destroy
+    redirect_to root_path, notice: 'Bidder profile deleted.'
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
