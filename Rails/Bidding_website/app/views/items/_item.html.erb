@@ -22,7 +22,7 @@
                 <% if current_seller.nil? == false and seller.id==current_seller.id%>
                     <td><%= link_to "Show", item_path(item)%>
                     <td><%= link_to "Edit", edit_item_path(item), method: edit_item_path(item)%>
-                    <td><%= link_to "Delete", item_path(item), method: :delete, data:{turbo_method: :delete}%></td>
+                    <td><%= link_to "Delete", item_path(item), method: :delete, data:{turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this item?"}%></td>
                 <% else %>                    
                     <td colspan = 3><%= link_to "Show", item_path(item)%>
                 <% end %>

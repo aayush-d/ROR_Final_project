@@ -41,4 +41,15 @@ class ItemsController < ApplicationController
             render "place_bid", status: :unprocessable_entity
         end
     end
+    
+    def destroy
+        @item = Item.find(params[:id])
+        if current_seller.id = @item.seller_id or current_seller
+            @item.destroy
+            redirect_to items_path, notice: 'Item deleted successfully.'
+        else
+            redirect_to items_path, notice: 'Item deleted successfully.'
+        end
+    end
 end
+
